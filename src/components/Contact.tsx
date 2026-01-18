@@ -115,7 +115,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <label htmlFor="interest" className="block text-sm font-medium text-gray-700 mb-2">
-                    I'm interested in
+                    I&apos;m interested in
                   </label>
                   <select
                     id="interest"
@@ -163,8 +163,8 @@ export default function Contact() {
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Get in Touch</h3>
               <p className="text-gray-600 mb-8">
-                Have questions about our programs, membership options, or need help getting started? 
-                We're here to help you every step of the way.
+                Have questions about our programs, membership options, or need help getting started?
+                We&apos;re here to help you every step of the way.
               </p>
             </div>
 

@@ -240,7 +240,7 @@ export default function FitnessGlossary() {
 
                 <div>
                   <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2">Example</h4>
-                  <p className="text-gray-700 dark:text-gray-300 italic">"{selectedTerm.example}"</p>
+                  <p className="text-gray-700 dark:text-gray-300 italic">&quot;{selectedTerm.example}&quot;</p>
             </div>
 
                 <div>

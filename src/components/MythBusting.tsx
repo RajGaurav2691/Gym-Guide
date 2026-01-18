@@ -96,7 +96,7 @@ export default function MythBusting() {
 
               <div className="mb-8">
                 <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                  "{myths[selectedMyth].myth}"
+                  &quot;{myths[selectedMyth].myth}&quot;
                 </h3>
                 <div className="text-2xl text-gray-600 dark:text-gray-300 mb-6">
                   {myths[selectedMyth].explanation}

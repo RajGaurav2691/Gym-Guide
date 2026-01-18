@@ -31,14 +31,7 @@ export default function MealPlanGenerator() {
   });
 
   const [generatedPlan, setGeneratedPlan] = useState<MealPlan | null>(null);
-  const [isGenerating, setIsGenerating] = useState(false);
-
-  const goalOptions = [
-    { id: 'weight-loss', name: 'Weight Loss', description: 'Caloric deficit for fat loss', icon: '📉' },
-    { id: 'muscle-gain', name: 'Muscle Gain', description: 'High protein for building muscle', icon: '💪' },
-    { id: 'maintenance', name: 'Maintenance', description: 'Balanced nutrition', icon: '⚖️' },
-    { id: 'performance', name: 'Performance', description: 'Optimized for athletic performance', icon: '🏃' }
-  ];
+  const [, setIsGenerating] = useState(false);
 
   const dietaryOptions = [
     { id: 'omnivore', name: 'Omnivore', description: 'All foods included', icon: '🍖' },
@@ -47,14 +40,6 @@ export default function MealPlanGenerator() {
     { id: 'keto', name: 'Keto', description: 'Low carb, high fat', icon: '🥑' },
     { id: 'paleo', name: 'Paleo', description: 'Whole foods only', icon: '🦴' },
     { id: 'mediterranean', name: 'Mediterranean', description: 'Heart-healthy fats & fish', icon: '🫒' }
-  ];
-
-  const activityLevels = [
-    { id: 'sedentary', name: 'Sedentary', description: 'Little to no exercise', multiplier: 1.2 },
-    { id: 'light', name: 'Light Activity', description: '1-3 days/week', multiplier: 1.375 },
-    { id: 'moderate', name: 'Moderate', description: '3-5 days/week', multiplier: 1.55 },
-    { id: 'very-active', name: 'Very Active', description: '6-7 days/week', multiplier: 1.725 },
-    { id: 'extreme', name: 'Extremely Active', description: '2x/day or intense training', multiplier: 1.9 }
   ];
 
   const allergyOptions = [
@@ -267,7 +252,7 @@ export default function MealPlanGenerator() {
     
     const dayPlan: DayPlan = {};
     
-    selectedMealTypes.forEach((mealType, index) => {
+    selectedMealTypes.forEach((mealType) => {
       let availableMeals: MealDetails[] = [];
       
       if (mealType === 'breakfast' && dietaryMeals.breakfast) {
@@ -422,7 +407,7 @@ export default function MealPlanGenerator() {
             
             {generatedPlan ? (
               <div className="space-y-6">
-                {Object.entries(generatedPlan.day1).map(([meal, details]: [string, any]) => (
+                {Object.entries(generatedPlan.day1).map(([meal, details]: [string, MealDetails]) => (
                   <div key={meal} className="border border-gray-200 dark:border-gray-700 rounded-xl p-4 sm:p-6 hover:shadow-md transition-shadow">
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3">
                       <h4 className="text-lg font-semibold text-gray-900 dark:text-white capitalize mb-2 sm:mb-0">
@@ -497,25 +482,25 @@ export default function MealPlanGenerator() {
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
                       <div className="text-2xl font-bold text-green-600 dark:text-green-400">
-                        {Object.values(generatedPlan.day1).reduce((sum: number, meal: any) => sum + meal.calories, 0)}
+                        {Object.values(generatedPlan.day1).reduce((sum: number, meal: MealDetails) => sum + meal.calories, 0)}
                       </div>
                       <div className="text-sm text-green-700 dark:text-green-300">Calories</div>
                     </div>
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
                       <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
-                        {Object.values(generatedPlan.day1).reduce((sum: number, meal: any) => sum + meal.macros.protein, 0)}g
+                        {Object.values(generatedPlan.day1).reduce((sum: number, meal: MealDetails) => sum + meal.macros.protein, 0)}g
                       </div>
                       <div className="text-sm text-blue-700 dark:text-blue-300">Protein</div>
                     </div>
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
                       <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
-                        {Object.values(generatedPlan.day1).reduce((sum: number, meal: any) => sum + meal.macros.carbs, 0)}g
+                        {Object.values(generatedPlan.day1).reduce((sum: number, meal: MealDetails) => sum + meal.macros.carbs, 0)}g
                       </div>
                       <div className="text-sm text-orange-700 dark:text-orange-300">Carbs</div>
                     </div>
                     <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-sm">
                       <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
-                        {Object.values(generatedPlan.day1).reduce((sum: number, meal: any) => sum + meal.macros.fat, 0)}g
+                        {Object.values(generatedPlan.day1).reduce((sum: number, meal: MealDetails) => sum + meal.macros.fat, 0)}g
                       </div>
                       <div className="text-sm text-purple-700 dark:text-purple-300">Fat</div>
                     </div>

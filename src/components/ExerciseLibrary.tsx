@@ -25,7 +25,7 @@ export default function ExerciseLibrary() {
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBodyPart, setSelectedBodyPart] = useState('all');
-  const [selectedEquipment, setSelectedEquipment] = useState('all');
+  const [selectedEquipment] = useState('all');
   const [selectedDifficulty, setSelectedDifficulty] = useState('all');
   const [savedExercises, setSavedExercises] = useState<number[]>([]);
   const [currentWorkout, setCurrentWorkout] = useState<Exercise[]>([]);
@@ -273,10 +273,6 @@ export default function ExerciseLibrary() {
     document.body.style.overflow = 'hidden';
   };
 
-  const closeExerciseModal = () => {
-    setSelectedExercise(null);
-    document.body.style.overflow = 'unset';
-  };
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-gray-900">
@@ -358,7 +354,7 @@ export default function ExerciseLibrary() {
           <p className="text-gray-600 dark:text-gray-400 mb-4 sm:mb-0">
             Showing <span className="font-bold text-red-600 dark:text-red-400">{filteredExercises.length}</span> exercises
             {searchTerm && (
-              <span> for "{searchTerm}"</span>
+              <span> for &quot;{searchTerm}&quot;</span>
             )}
           </p>
           

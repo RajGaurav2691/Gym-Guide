@@ -2,16 +2,46 @@
 
 import { useState } from 'react';
 
+/* =======================
+   Types
+======================= */
+
+type BaseExercise = {
+  id: number;
+  name: string;
+  category: string;
+  equipment: string;
+};
+
+type WorkoutExercise = BaseExercise & {
+  sets: number;
+  reps: number;
+  rest: number;
+};
+
+type WorkoutDaysMap = Record<string, WorkoutExercise[]>;
+
+/* =======================
+   Component
+======================= */
+
 export default function CustomSplitBuilder() {
   const [splitName, setSplitName] = useState('');
   const [daysPerWeek, setDaysPerWeek] = useState(3);
-  const [selectedDays, setSelectedDays] = useState([]);
-  const [workoutDays, setWorkoutDays] = useState({});
-  const [dragOver, setDragOver] = useState(false);
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+  const [workoutDays, setWorkoutDays] = useState<WorkoutDaysMap>({});
 
-  const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-  
-  const availableExercises = [
+  const daysOfWeek = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ];
+
+  const availableExercises: BaseExercise[] = [
     { id: 1, name: 'Push-ups', category: 'Chest', equipment: 'Bodyweight' },
     { id: 2, name: 'Squats', category: 'Legs', equipment: 'Bodyweight' },
     { id: 3, name: 'Plank', category: 'Core', equipment: 'Bodyweight' },
@@ -21,39 +51,61 @@ export default function CustomSplitBuilder() {
     { id: 7, name: 'Lunges', category: 'Legs', equipment: 'Bodyweight' },
     { id: 8, name: 'Shoulder Press', category: 'Shoulders', equipment: 'Dumbbells' },
     { id: 9, name: 'Bicep Curls', category: 'Arms', equipment: 'Dumbbells' },
-    { id: 10, name: 'Tricep Dips', category: 'Arms', equipment: 'Bodyweight' }
+    { id: 10, name: 'Tricep Dips', category: 'Arms', equipment: 'Bodyweight' },
   ];
 
-  const handleDaySelect = (day) => {
+  /* =======================
+     Handlers
+  ======================= */
+
+  const handleDaySelect = (day: string) => {
     if (selectedDays.includes(day)) {
-      setSelectedDays(selectedDays.filter(d => d !== day));
-      const newWorkoutDays = { ...workoutDays };
-      delete newWorkoutDays[day];
-      setWorkoutDays(newWorkoutDays);
+      setSelectedDays(prev => prev.filter(d => d !== day));
+      setWorkoutDays(prev => {
+        const { [day]: _, ...rest } = prev;
+        return rest;
+      });
     } else if (selectedDays.length < daysPerWeek) {
-      setSelectedDays([...selectedDays, day]);
-      setWorkoutDays({ ...workoutDays, [day]: [] });
+      setSelectedDays(prev => [...prev, day]);
+      setWorkoutDays(prev => ({ ...prev, [day]: [] }));
     }
   };
 
-  const addExerciseToDay = (day, exercise) => {
-    const newExercise = { ...exercise, sets: 3, reps: 10, rest: 60 };
-    setWorkoutDays({
-      ...workoutDays,
-      [day]: [...(workoutDays[day] || []), newExercise]
+  const addExerciseToDay = (day: string, exercise: BaseExercise) => {
+    const newExercise: WorkoutExercise = {
+      ...exercise,
+      sets: 3,
+      reps: 10,
+      rest: 60,
+    };
+
+    setWorkoutDays(prev => ({
+      ...prev,
+      [day]: [...(prev[day] ?? []), newExercise],
+    }));
+  };
+
+  const removeExerciseFromDay = (day: string, exerciseIndex: number) => {
+    setWorkoutDays(prev => ({
+      ...prev,
+      [day]: prev[day].filter((_, index) => index !== exerciseIndex),
+    }));
+  };
+
+  const updateExercise = (
+    day: string,
+    exerciseIndex: number,
+    field: keyof Pick<WorkoutExercise, 'sets' | 'reps' | 'rest'>,
+    value: number
+  ) => {
+    setWorkoutDays(prev => {
+      const updatedDay = [...prev[day]];
+      updatedDay[exerciseIndex] = {
+        ...updatedDay[exerciseIndex],
+        [field]: value,
+      };
+      return { ...prev, [day]: updatedDay };
     });
-  };
-
-  const removeExerciseFromDay = (day, exerciseIndex) => {
-    const newWorkoutDays = { ...workoutDays };
-    newWorkoutDays[day] = newWorkoutDays[day].filter((_, index) => index !== exerciseIndex);
-    setWorkoutDays(newWorkoutDays);
-  };
-
-  const updateExercise = (day, exerciseIndex, field, value) => {
-    const newWorkoutDays = { ...workoutDays };
-    newWorkoutDays[day][exerciseIndex][field] = value;
-    setWorkoutDays(newWorkoutDays);
   };
 
   const saveSplit = () => {

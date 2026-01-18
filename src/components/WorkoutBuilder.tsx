@@ -36,9 +36,9 @@ interface SavedWorkout {
 export default function WorkoutBuilder() {
   const [workoutName, setWorkoutName] = useState('');
   const [selectedExercises, setSelectedExercises] = useState<WorkoutExercise[]>([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
-  const [selectedDifficulty, setSelectedDifficulty] = useState('all');
+  const [searchTerm] = useState('');
+  const [selectedCategory] = useState('all');
+  const [selectedDifficulty] = useState('all');
   const [savedWorkouts, setSavedWorkouts] = useState<SavedWorkout[]>([]);
   const [isBuilding, setIsBuilding] = useState(true); // Simplified state for view toggling
 
@@ -157,8 +157,6 @@ export default function WorkoutBuilder() {
   ];
 
   // Functions remain the same until deleteWorkout
-  const categories = ['all', 'Chest', 'Back', 'Legs', 'Shoulders', 'Core', 'Cardio'];
-  const difficulties = ['all', 'Beginner', 'Intermediate', 'Advanced'];
 
   const filteredExercises = availableExercises.filter(exercise => {
     const matchesSearch = exercise.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -185,7 +183,7 @@ export default function WorkoutBuilder() {
     setSelectedExercises(selectedExercises.filter((_, i) => i !== index));
   };
 
-  const updateExercise = (index: number, field: keyof WorkoutExercise, value: any) => {
+  const updateExercise = (index: number, field: keyof WorkoutExercise, value: string | number) => {
     const updated = [...selectedExercises];
     updated[index] = { ...updated[index], [field]: value };
     setSelectedExercises(updated);

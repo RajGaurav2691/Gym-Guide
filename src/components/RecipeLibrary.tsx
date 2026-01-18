@@ -341,7 +341,7 @@ export default function RecipeLibrary() {
           <p className="text-gray-600 dark:text-gray-400">
             Showing <span className="font-bold text-green-600 dark:text-green-400">{filteredRecipes.length}</span> recipes
             {searchTerm && (
-              <span> for "{searchTerm}"</span>
+              <span> for &quot;{searchTerm}&quot;</span>
             )}
           </p>
         </div>

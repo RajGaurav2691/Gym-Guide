@@ -163,9 +163,9 @@ export default function DashboardHero() {
         {/* Motivation Quote */}
         <div className="mt-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-2xl p-8 text-white text-center">
           <div className="text-4xl mb-4">💪</div>
-          <h3 className="text-2xl font-bold mb-2">Today's Motivation</h3>
+          <h3 className="text-2xl font-bold mb-2">Today&apos;s Motivation</h3>
           <p className="text-xl opacity-90 mb-4">
-            "The only bad workout is the one that didn't happen."
+            &quot;The only bad workout is the one that didn&apos;t happen.&quot;
           </p>
           <p className="text-sm opacity-75">- Anonymous</p>
         </div>

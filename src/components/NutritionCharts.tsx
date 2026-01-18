@@ -27,8 +27,7 @@ interface Micronutrient {
 
 export default function NutritionCharts() {
   const [selectedPeriod, setSelectedPeriod] = useState('week');
-  const [waterIntake, setWaterIntake] = useState(6);
-  const [selectedMacro, setSelectedMacro] = useState<string | null>(null);
+  const [,] = useState<string | null>(null);
 
   const periods = [
     { id: 'day', name: 'Today', icon: '🌅' },
@@ -62,17 +61,6 @@ export default function NutritionCharts() {
     { name: 'Vitamin D', current: 15, target: 20, unit: 'mcg', color: 'bg-purple-500', benefits: 'Bone & immune health' }
   ];
 
-  const addWater = () => {
-    if (waterIntake < 12) {
-      setWaterIntake(prev => prev + 1);
-    }
-  };
-
-  const removeWater = () => {
-    if (waterIntake > 0) {
-      setWaterIntake(prev => prev - 1);
-    }
-  };
 
   return (
     <section className="py-12 sm:py-16 lg:py-20 bg-white dark:bg-gray-900">
@@ -144,7 +132,7 @@ export default function NutritionCharts() {
           <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Weekly Trend</h3>
             <div className="space-y-4">
-              {weeklyData.map((day, index) => (
+              {weeklyData.map((day) => (
                 <div key={day.day} className="flex items-center space-x-4">
                   <div className="w-12 text-sm font-medium text-gray-600 dark:text-gray-400">
                     {day.day}

@@ -22,7 +22,7 @@ export default function About() {
       title: "Modern Equipment",
       description: "State-of-the-art fitness equipment and facilities to support all your training needs."
     },
-    {
+  {
       icon: "📱",
       title: "Mobile App",
       description: "Track your workouts, monitor progress, and access exclusive content through our mobile app."
@@ -47,7 +47,7 @@ export default function About() {
             About FitLife Gym
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We're more than just a gym - we're your partner in achieving a healthier, stronger, and more confident you.
+            We&apos;re more than just a gym - we&apos;re your partner in achieving a healthier, stronger, and more confident you.
           </p>
         </div>
 

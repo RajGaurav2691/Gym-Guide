@@ -2,9 +2,33 @@
 
 import { useState } from 'react';
 
+type ChallengeProgress = {
+  joined: boolean;
+  progress: number;
+  completed: boolean;
+};
+
+type UserProgressMap = Record<number, ChallengeProgress>;
+
+type Challenge = {
+  id: number;
+  title: string;
+  description: string;
+  type: string;
+  duration: string;
+  participants: number;
+  difficulty: string;
+  rewards: string[];
+  requirements: string;
+  startDate: string;
+  endDate: string;
+  isActive: boolean;
+  isJoined: boolean;
+};
+
 export default function ChallengesSection() {
-  const [selectedChallenge, setSelectedChallenge] = useState(null);
-  const [userProgress, setUserProgress] = useState({});
+  const [selectedChallenge, setSelectedChallenge] = useState<Challenge | null>(null);
+  const [userProgress, setUserProgress] = useState<UserProgressMap>({});
 
   const challenges = [
     {
@@ -92,7 +116,7 @@ export default function ChallengesSection() {
     { rank: 5, name: "Lisa Park", score: 2320, avatar: "LP" }
   ];
 
-  const getDifficultyColor = (difficulty) => {
+  const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
       case 'beginner': return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
       case 'intermediate': return 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200';
@@ -101,7 +125,7 @@ export default function ChallengesSection() {
     }
   };
 
-  const getTypeIcon = (type) => {
+  const getTypeIcon = (type: string) => {
     switch (type) {
       case 'strength': return '💪';
       case 'cardio': return '❤️';
@@ -110,7 +134,7 @@ export default function ChallengesSection() {
     }
   };
 
-  const joinChallenge = (challengeId) => {
+  const joinChallenge = (challengeId: number) => {
     setUserProgress(prev => ({
       ...prev,
       [challengeId]: { joined: true, progress: 0, completed: false }
@@ -118,7 +142,7 @@ export default function ChallengesSection() {
     alert('Successfully joined the challenge!');
   };
 
-  const leaveChallenge = (challengeId) => {
+  const leaveChallenge = (challengeId: number) => {
     setUserProgress(prev => {
       const newProgress = { ...prev };
       delete newProgress[challengeId];

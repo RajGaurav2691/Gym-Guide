@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
+import {Image} from "next/image";
 
 export default function ProgressTools() {
   const [beforeImage, setBeforeImage] = useState(null);
@@ -72,7 +73,7 @@ export default function ProgressTools() {
                 <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
                   {beforeImage ? (
                     <div className="relative">
-                      <img src={beforeImage} alt="Before" className="w-full h-48 object-cover rounded-lg" />
+                      <Image src={beforeImage} alt="Before" className="w-full h-48 object-cover rounded-lg" />
                       <button
                         onClick={() => setBeforeImage(null)}
                         className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm"
@@ -103,7 +104,7 @@ export default function ProgressTools() {
                 <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center">
                   {afterImage ? (
                     <div className="relative">
-                      <img src={afterImage} alt="After" className="w-full h-48 object-cover rounded-lg" />
+                      <Image src={afterImage} alt="After" className="w-full h-48 object-cover rounded-lg" />
                       <button
                         onClick={() => setAfterImage(null)}
                         className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm"
@@ -147,12 +148,12 @@ export default function ProgressTools() {
                   {showComparison && (
                     <div className="relative bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden">
                       <div className="relative h-64">
-                        <img
+                        <Image
                           src={beforeImage}
                           alt="Before"
                           className="absolute inset-0 w-full h-full object-cover"
                         />
-                        <img
+                        <Image
                           src={afterImage}
                           alt="After"
                           className="absolute inset-0 w-full h-full object-cover"

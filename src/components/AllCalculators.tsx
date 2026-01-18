@@ -2,13 +2,6 @@
 
 import { useState } from 'react';
 
-interface Calculator {
-  id: string;
-  name: string;
-  icon: string;
-  description: string;
-  category: string;
-}
 
 interface FormData {
   height: string;

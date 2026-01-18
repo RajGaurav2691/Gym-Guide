@@ -32,11 +32,11 @@ export default function WorkoutOfTheDay() {
   const [timeElapsed, setTimeElapsed] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-  const [currentSet, setCurrentSet] = useState(1);
+  const [, setCurrentSet] = useState(1);
   const [isResting, setIsResting] = useState(false);
   const [restTimeLeft, setRestTimeLeft] = useState(0);
   const [completedExercises, setCompletedExercises] = useState<boolean[]>([]);
-  const [workoutPhase, setWorkoutPhase] = useState<'warmup' | 'main' | 'cooldown'>('main');
+  const [,] = useState<'warmup' | 'main' | 'cooldown'>('main');
   const [showInstructions, setShowInstructions] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState<Exercise | null>(null);
 
@@ -163,6 +163,7 @@ export default function WorkoutOfTheDay() {
     const selectedWorkout = workouts[workoutIndex];
     setCurrentWorkout(selectedWorkout);
     setCompletedExercises(new Array(selectedWorkout.exercises.length).fill(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -205,9 +206,6 @@ export default function WorkoutOfTheDay() {
     setIsActive(false);
   };
 
-  const resumeWorkout = () => {
-    setIsActive(true);
-  };
 
   const completeExercise = (index: number) => {
     const newCompleted = [...completedExercises];
@@ -279,14 +277,13 @@ export default function WorkoutOfTheDay() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-500 mx-auto"></div>
-            <p className="mt-4 text-gray-600 dark:text-gray-400">Loading today's workout...</p>
+            <p className="mt-4 text-gray-600 dark:text-gray-400">Loading today&apos;s workout...</p>
           </div>
         </div>
       </section>
     );
   }
 
-  const currentExercise = currentWorkout.exercises[currentExerciseIndex];
   const progressPercentage = ((currentExerciseIndex + 1) / currentWorkout.exercises.length) * 100;
 
   return (
@@ -297,7 +294,7 @@ export default function WorkoutOfTheDay() {
             Workout of the Day
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Ready for today's challenge? Let's get moving!
+            Ready for today&apos;s challenge? Let&apos;s get moving!
           </p>
         </div>
 

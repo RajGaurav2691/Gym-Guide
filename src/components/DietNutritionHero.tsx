@@ -13,7 +13,7 @@ interface Goal {
 
 export default function DietNutritionHero() {
   const [activeGoal, setActiveGoal] = useState('weight-loss');
-  const [showDetails, setShowDetails] = useState(false);
+  const [,] = useState(false);
 
   const goals: Goal[] = [
     { 

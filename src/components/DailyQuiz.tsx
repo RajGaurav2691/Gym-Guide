@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export default function DailyQuiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -155,7 +155,7 @@ export default function DailyQuiz() {
             Daily Fitness Quiz
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300">
-            Test your knowledge with today's quiz
+            Test your knowledge with today&apos;s quiz
           </p>
         </div>
 
